@@ -4,7 +4,7 @@ metadata:
   annotations:
     description: "Application template for drawio"
   creationTimestamp: null
-  name: mozaik-config
+  name: drawio-config
 objects:
 - apiVersion: extensions/v1beta1
   kind: Deployment
@@ -72,7 +72,6 @@ objects:
       app.kubernetes.io/instance: drawio
     name: drawio
   spec:
-    host: drawio-${NAMESPACE}${GUID}.${APPLICATION_DOMAIN}
     port:
       targetPort: 8080-tcp
     to:
@@ -80,18 +79,3 @@ objects:
       name: drawio
       weight: 100
     wildcardPolicy: None
-parameters:
-  - name: NAMESPACE
-    displayName: Application Name
-    description: the name and label for all components
-    value: podium
-    required: true 
-  - name: GUID
-    displayName: Application GUID
-    description: the GUID name component for the individual instance in a series of application deployments, typically a dash followed by a 4 character string like -f3ax
-    required: false
-  - name: APPLICATION_DOMAIN
-    displayName: Application Domain
-    description: Application domain name used in route to service
-    value: apps.cloud.example.com
-    required: true
