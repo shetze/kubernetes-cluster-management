@@ -1,8 +1,6 @@
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
-    annotations:
-      image.openshift.io/triggers: '[{"from":{"kind":"ImageStreamTag","name":"drawio:latest","namespace":"draw"},"fieldPath":"spec.template.spec.containers[?(@.name==\"drawio\")].image"}]'
     labels:
       app: drawio
       app.kubernetes.io/component: drawio
