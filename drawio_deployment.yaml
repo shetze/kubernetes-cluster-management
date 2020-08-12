@@ -1,0 +1,31 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+    annotations:
+      image.openshift.io/triggers: '[{"from":{"kind":"ImageStreamTag","name":"drawio:latest","namespace":"draw"},"fieldPath":"spec.template.spec.containers[?(@.name==\"drawio\")].image"}]'
+    labels:
+      app: drawio
+      app.kubernetes.io/component: drawio
+      app.kubernetes.io/instance: drawio
+      app.kubernetes.io/part-of: drawio
+    name: drawio
+spec:
+    replicas: 1
+    selector:
+      matchLabels:
+        app: drawio
+    template:
+      metadata:
+        labels:
+          app: drawio
+          deploymentconfig: drawio
+      spec:
+        containers:
+        - image: docker.io/jgraph/drawio
+          imagePullPolicy: Always
+          name: drawio
+          ports:
+          - containerPort: 8080
+            protocol: TCP
+          - containerPort: 8443
+            protocol: TCP
