@@ -1,0 +1,24 @@
+apiVersion: v1
+kind: Service
+metadata:
+    labels:
+      app: drawio
+      app.kubernetes.io/component: drawio
+      app.kubernetes.io/instance: drawio
+      app.kubernetes.io/part-of: drawio
+    name: drawio
+spec:
+    ports:
+    - name: 8080-tcp
+      port: 8080
+      protocol: TCP
+      targetPort: 8080
+    - name: 8443-tcp
+      port: 8443
+      protocol: TCP
+      targetPort: 8443
+    selector:
+      app: drawio
+      deploymentconfig: drawio
+    sessionAffinity: None
+    type: ClusterIP
